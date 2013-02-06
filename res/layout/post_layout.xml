@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/widget30"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:padding="4dip" xmlns:android="http://schemas.android.com/apk/res/android">
+	<TextView android:id="@+id/details" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="TextView"
+		android:textColor="#000000" android:layout_toRightOf="@+id/thumb"
+		android:layout_alignLeft="@+id/title" android:layout_alignRight="@+id/title"
+		android:layout_below="@+id/title" android:layout_marginRight="5px">
+	</TextView>
+	<TextView android:id="@+id/title" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="TextView"
+		android:textStyle="bold" android:textColor="#000000"
+		android:layout_marginTop="5px" android:layout_toRightOf="@+id/thumb"
+		android:layout_marginRight="5px">
+	</TextView>
+	<ImageView android:id="@+id/arrow" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:padding="0px"
+		android:layout_marginRight="10px" android:src="@drawable/rightarrow"
+		android:layout_alignRight="@+id/thumb" android:layout_alignParentRight="true"
+		android:layout_centerVertical="true">
+	</ImageView>
+	<ImageView android:id="@+id/thumb" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_marginRight="10px"
+		android:layout_alignParentLeft="true">
+	</ImageView>
+
+</RelativeLayout>
