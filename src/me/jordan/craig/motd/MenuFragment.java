@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+//import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 @SuppressLint({ "DefaultLocale", "SimpleDateFormat" })
 @Deprecated
@@ -93,7 +93,7 @@ public class MenuFragment extends SherlockListFragment {
         CountdownTimer counter = new CountdownTimer(milliseconds,1000);
         counter.start();
 		
-		UrlImageViewHelper.setUrlDrawable(member, "http://www.marchofthedroids.co.uk/wp-content/uploads/2012/08/cropped-web_banner.png");
+		//UrlImageViewHelper.setUrlDrawable(member, "http://www.marchofthedroids.co.uk/wp-content/uploads/2012/08/cropped-web_banner.png");
 		return FragmentView;
 	}
 

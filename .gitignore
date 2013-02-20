@@ -166,3 +166,7 @@ pip-log.txt
 
 gen
 target
+gen-*
+
+*.iml
+.idea

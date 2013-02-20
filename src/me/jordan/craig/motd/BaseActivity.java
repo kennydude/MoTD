@@ -20,6 +20,7 @@ public class BaseActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		
 		pager = new ViewPager(this);
+        pager.setId(3843989);
 		setContentView(pager);
 		
 		ActionBar ab = getSupportActionBar();
