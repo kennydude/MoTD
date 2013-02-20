@@ -1,6 +1,5 @@
 package me.jordan.craig.motd;
 
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,9 +8,9 @@ import java.util.HashMap;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import me.jordan.craig.utils.EfficientAdapter;
-import me.jordan.craig.utils.Post;
+import me.jordan.craig.models.Post;
 
+import org.lucasr.smoothie.AsyncListView;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -29,24 +28,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 public class ContentFragment extends Fragment {
-	
 	private View FragmentView;
-	private ListView news_feed;
+	private AsyncListView news_feed;
 	private ProgressDialog ShowProgress;
 	public ArrayList<Post> PostList = new ArrayList<Post>();
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		FragmentView = inflater.inflate(R.layout.content_layout, container, false);
-		news_feed = (ListView) FragmentView.findViewById(R.id.listView1);
+		news_feed = (AsyncListView) FragmentView.findViewById(R.id.listView1);
 		return FragmentView;
 	}
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		ShowProgress = ProgressDialog.show(getActivity(),"", "Loading... Please wait.", true);
+		
+		ShowProgress = new ProgressDialog(getActivity());
+		ShowProgress.setMessage(getString(R.string.please_wait));
+		ShowProgress.show();
+		
 		new loadingTask().execute("http://www.marchofthedroids.co.uk/feed/");
 		news_feed.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,

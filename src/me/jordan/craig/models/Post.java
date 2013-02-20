@@ -1,5 +1,10 @@
-package me.jordan.craig.utils;
+package me.jordan.craig.models;
 
+/**
+ * A post
+ * @author Jordan Craig
+ *
+ */
 public class Post {
 
 	private String title;

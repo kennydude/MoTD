@@ -16,6 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * Not required.
+ */
+@Deprecated
 public class EfficientAdapter extends BaseAdapter {
 	private Activity activity;
 	private ArrayList<Post> data;
