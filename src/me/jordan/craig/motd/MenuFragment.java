@@ -23,6 +23,7 @@ import com.actionbarsherlock.app.SherlockListFragment;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 @SuppressLint({ "DefaultLocale", "SimpleDateFormat" })
+@Deprecated
 public class MenuFragment extends SherlockListFragment {
 
 	private ListView lv;

@@ -1,43 +1,40 @@
 package me.jordan.craig.motd;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import com.actionbarsherlock.view.*;
+import android.support.v4.view.ViewPager;
+import android.view.View;
 
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
-
-public class BaseActivity extends SlidingFragmentActivity {
+public class BaseActivity extends SherlockFragmentActivity {
+	ViewPager pager;
+	TabsAdapter ta;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		SlidingMenu sm = getSlidingMenu();
-		setBehindContentView(R.layout.sliding_menu_layout);
-		sm.setShadowWidthRes(R.dimen.shadow_width);
-		sm.setShadowDrawable(R.drawable.shadow);
-		sm.setBehindOffsetRes(R.dimen.actionbar_home_width);
-		sm.setBehindScrollScale(0.25f);
-		sm.setFadeDegree(0.35f);
-		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		FragmentTransaction menu = getSupportFragmentManager().beginTransaction();
-		menu.add(R.id.frame, new MenuFragment());
-		menu.commit();
+		pager = new ViewPager(this);
+		setContentView(pager);
 		
-		setContentView(R.layout.content_frame);
-		getSupportFragmentManager()
-		.beginTransaction()
-		.replace(R.id.frame_content, new ContentFragment())
-		.commit();
+		ActionBar ab = getSupportActionBar();
+		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		
+		ta = new TabsAdapter(this, pager);
+		ta.addTab(ab.newTab().setText(R.string.tab_news), ContentFragment.class, null);
+		ta.addTab(ab.newTab().setText(R.string.tab_chat), ChatFragment.class, null);
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
-				toggle();
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -45,9 +42,6 @@ public class BaseActivity extends SlidingFragmentActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (getSlidingMenu().isMenuShowing()) {
-			getSlidingMenu().showContent();
-		}
 	}
 
 

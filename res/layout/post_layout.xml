@@ -20,9 +20,9 @@
 		android:layout_alignRight="@+id/thumb" android:layout_alignParentRight="true"
 		android:layout_centerVertical="true">
 	</ImageView>
-	<ImageView android:id="@+id/thumb" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_marginRight="10px"
+	<uk.co.senab.bitmapcache.CacheableImageView android:id="@+id/thumb" android:layout_width="100dp"
+		android:layout_height="100dp" android:layout_marginRight="10px"
 		android:layout_alignParentLeft="true">
-	</ImageView>
+	</uk.co.senab.bitmapcache.CacheableImageView>
 
 </RelativeLayout>
