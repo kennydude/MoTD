@@ -6,6 +6,6 @@
     <string name="please_wait">Please wait</string>
 
     <string name="tab_news">News</string>
-    <string name="tab_chat">Chat</string>
+    <string name="tab_chat">Chat</string><string name="send">Send</string>
     
 </resources>

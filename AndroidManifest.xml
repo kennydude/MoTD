@@ -7,9 +7,20 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- App receives GCM messages. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- GCM connects to Google Services. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +37,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".BackgroundChatReceiver">
+            <intent-filter>
+                <action android:name="me.jordan.craig.motd.CHAT_MESSAGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- GCM -->
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="me.jordan.craig.motd" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GCMIntentService" />
     </application>
 
 </manifest>
