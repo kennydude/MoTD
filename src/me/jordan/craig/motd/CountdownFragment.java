@@ -1,11 +1,13 @@
 package me.jordan.craig.motd;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -32,12 +34,18 @@ public class CountdownFragment extends Fragment {
 		Calendar now = Calendar.getInstance();
 
 		// This is ugly, but meh
+		boolean is_now = false;
+
 		if(now.get(Calendar.DAY_OF_MONTH) == eventDate.get(Calendar.DAY_OF_MONTH)){
 			// TODAY
 			int hours = eventDate.get(Calendar.HOUR_OF_DAY) - now.get(Calendar.HOUR_OF_DAY);
 			if(hours < 0 ){
 				countdown.setText("NOW");
+				is_now = true;
 			} else{
+				if(hours < 2){
+					is_now = true;
+				}
 				countdown.setText(hours + " hours");
 			}
 		} else{
@@ -49,5 +57,20 @@ public class CountdownFragment extends Fragment {
 				countdown.setText( days + " days");
 			}
 		}
+
+		Button b = (Button)getView().findViewById(R.id.here);
+		b.setVisibility(is_now ? View.VISIBLE : View.GONE);
+		b.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View view) {
+				Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+				sharingIntent.setType("text/plain");
+				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "I'm at @marchofthedroid http://marchofthedroids.co.uk");
+
+				startActivity(Intent.createChooser(sharingIntent, "Share via"));
+			}
+
+		});
 	}
 }

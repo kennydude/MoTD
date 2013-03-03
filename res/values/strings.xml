@@ -11,6 +11,6 @@
     <string name="send">Send</string>
     <string name="tab_countdown">Countdown</string>
     <string name="to_go">To go before March of the Droids</string>
-    <string name="chat_hint">Type here to chat"</string>
+    <string name="chat_hint">Type here to chat"</string><string name="here">I\'m here!</string>
     
 </resources>
