@@ -1,5 +1,7 @@
 package me.jordan.craig.motd;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -27,8 +29,20 @@ public class BaseActivity extends SherlockFragmentActivity {
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
 		ta = new TabsAdapter(this, pager);
+		ta.addTab(ab.newTab().setText(R.string.tab_countdown), CountdownFragment.class, null);
 		ta.addTab(ab.newTab().setText(R.string.tab_news), ContentFragment.class, null);
 		ta.addTab(ab.newTab().setText(R.string.tab_chat), ChatFragment.class, null);
+
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		pager.setCurrentItem( getIntent().getIntExtra("page", sp.getInt("last_page", 0) ) );
+	}
+
+	@Override
+	public void onStop(){
+		super.onStop();
+
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		sp.edit().putInt("last_page", pager.getCurrentItem()).commit();
 	}
 	
 	@Override

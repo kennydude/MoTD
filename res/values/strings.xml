@@ -6,6 +6,11 @@
     <string name="please_wait">Please wait</string>
 
     <string name="tab_news">News</string>
-    <string name="tab_chat">Chat</string><string name="send">Send</string>
+    <string name="choose_name">What is your name?</string>
+    <string name="tab_chat">Chat</string>
+    <string name="send">Send</string>
+    <string name="tab_countdown">Countdown</string>
+    <string name="to_go">To go before March of the Droids</string>
+    <string name="chat_hint">Type here to chat"</string>
     
 </resources>

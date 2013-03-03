@@ -39,7 +39,7 @@
         </activity>
 
         <receiver android:name=".BackgroundChatReceiver">
-            <intent-filter>
+            <intent-filter android:priority="-1">
                 <action android:name="me.jordan.craig.motd.CHAT_MESSAGE" />
             </intent-filter>
         </receiver>

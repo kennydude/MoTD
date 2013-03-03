@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import android.widget.*;
 import me.jordan.craig.models.Post;
 import me.jordan.craig.utils.Utils;
 
@@ -34,11 +35,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 /**
  * News Feed
@@ -49,7 +46,7 @@ public class ContentFragment extends Fragment {
 	private View FragmentView;
 	
 	private AsyncListView news_feed;
-	private ProgressDialog ShowProgress;
+	private ProgressBar ShowProgress;
 	public PostAdapter postAdapter;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,9 +71,8 @@ public class ContentFragment extends Fragment {
 		news_feed.setAdapter(postAdapter);
 		
 		// Show load dialog
-		ShowProgress = new ProgressDialog(getActivity());
-		ShowProgress.setMessage(getString(R.string.please_wait));
-		ShowProgress.show();
+		ShowProgress = (ProgressBar) getView().findViewById(R.id.progress);
+		ShowProgress.setVisibility(View.VISIBLE);
 		
 		new LoadFeedTask().execute("http://www.marchofthedroids.co.uk/feed/");
 		news_feed.setOnItemClickListener(new OnItemClickListener() {
@@ -178,7 +174,7 @@ public class ContentFragment extends Fragment {
 
 		protected void onPostExecute(String s) {
 			postAdapter.notifyDataSetInvalidated();
-			ShowProgress.dismiss();
+			ShowProgress.setVisibility(View.GONE);
 		}
 	}
 	
@@ -246,7 +242,12 @@ public class ContentFragment extends Fragment {
 			}
 
 			if (localName.equalsIgnoreCase("item")) {
-				postAdapter.add(currentPost);
+				getActivity().runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						postAdapter.add(currentPost);
+					}
+				});
 				currentPost = new Post();
 			}
 
