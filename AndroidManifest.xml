@@ -1,58 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.jordan.craig.motd"
-    android:versionCode="1"
-    android:versionName="1.0" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="7" android:versionName="0.1" package="me.jordan.craig.motd">
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17"/>
     <!-- App receives GCM messages. -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <!-- GCM connects to Google Services. -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- GCM requires a Google account. -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <!-- Keeps the processor from sleeping when a message is received. -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE" />
+    <permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="me.jordan.craig.motd.permission.C2D_MESSAGE"/>
 
-    <application
-        android:allowBackup="true"
-        android:name="me.jordan.craig.motd.App"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock.Light" >
-        <activity
-            android:name="me.jordan.craig.motd.BaseActivity"
-            android:label="@string/app_name" >
+    <application android:allowBackup="true" android:debuggable="false" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="me.jordan.craig.motd.App" android:theme="@style/Theme.Sherlock.Light">
+        <activity android:label="@string/app_name" android:name="me.jordan.craig.motd.BaseActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <receiver android:name=".BackgroundChatReceiver">
             <intent-filter android:priority="-1">
-                <action android:name="me.jordan.craig.motd.CHAT_MESSAGE" />
+                <action android:name="me.jordan.craig.motd.CHAT_MESSAGE"/>
             </intent-filter>
         </receiver>
 
         <!-- GCM -->
-        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="me.jordan.craig.motd" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="me.jordan.craig.motd"/>
             </intent-filter>
         </receiver>
-        <service android:name=".GCMIntentService" />
+        <service android:name=".GCMIntentService"/>
     </application>
 
 </manifest>
